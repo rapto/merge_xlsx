@@ -11,8 +11,8 @@ for i in range(2,16):
 merge('demo.xlsx', 'salida.xlsx', **subs)
 ```
 Template:
-![Worksheet used as template][logo]
+![Worksheet used as template](../images/images/demo.png)
 
 Result:
-![Result Worksheet (merged with data)][logo]
+![Result Worksheet (merged with data)](../images/images/salida.png)
 
