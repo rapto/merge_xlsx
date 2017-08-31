@@ -52,7 +52,7 @@ def from_ISO8601(formatted_string):
     if not match:
         raise ValueError("Invalid datetime value {}".format(formatted_string))
 
-    parts = {k:int(v) for k, v in match.groupdict().items() if v is not None and v.isdigit()}
+    parts = dict((k,int(v)) for k, v in match.groupdict().items() if v is not None and v.isdigit())
     if 'year' not in parts:
         dt = datetime.time(parts['hour'], parts['minute'], parts['second'])
     elif 'hour' not in parts:
