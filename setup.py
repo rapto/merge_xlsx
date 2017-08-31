@@ -15,6 +15,8 @@ setup(name='merge_xlsx',
       packages=['merge_xlsx'],
       install_requires=[
                         'path.py>=7.7.1',
+                        ],
+      tests_require=[
                         'openpyxl>=2.4',
                         'unittest2>=0.5.1'
                         ],
