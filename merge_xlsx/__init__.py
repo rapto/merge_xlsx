@@ -1,6 +1,10 @@
 from zipfile import ZipFile, ZIP_DEFLATED
 from lxml import etree
-from path import Path
+import sys
+if sys.version_info >= (2, 7):
+    from path import Path
+else:
+    from path import path as Path
 from merge_xlsx.util import TemporaryDirectory
 from contextlib import contextmanager
 import datetime
@@ -16,7 +20,8 @@ ns = dict(r='http://schemas.openxmlformats.org/package/2006/relationships',
 
 def update_cell_value(dp, k, v):
     ET = etree.parse(dp/'xl/_rels/workbook.xml.rels')
-    ws_path = dp / 'xl' / ET.xpath('''//r:Relationship[@Type='http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet']/@Target''', namespaces=ns)[0]
+    ws_path = dp / 'xl' / (sorted(ET.xpath('''//r:Relationship[@Type='http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet']/@Target''', namespaces=ns))[0])
+    ET = etree.parse(ws_path)
     if isinstance(v, basestring):
         c = ET.xpath('''//oo:c[@r='%s']''' % k, namespaces=ns)[0]
         cv = ET.xpath('''//oo:c[@r='%s']/oo:v''' % k, namespaces=ns)[0]

@@ -1,0 +1,6 @@
+.*
+*.pyc
+/build
+/dist
+/merge_xlsx.egg-info/
+
