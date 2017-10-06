@@ -27,7 +27,8 @@ def update_cell_value(dp, k, v):
         cv = ET.xpath('''//oo:c[@r='%s']/oo:v''' % k, namespaces=ns)[0]
         c.attrib['t'] = 'inlineStr'
         c.remove(cv)
-        del c.attrib['s'] # FIXME
+        if 's' in c.attrib:
+            del c.attrib['s'] # FIXME
         c.append(etree.fromstring('<is xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" ><t>%s</t></is>' % v))
     else:
         if isinstance(v, (datetime.date, datetime.datetime)):
